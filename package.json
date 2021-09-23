@@ -1,5 +1,5 @@
 {
-  "name": "rif-material-ui",
+  "name": "@rsksmart/rif-material-ui",
   "version": "1.0.0",
   "main": "build/index.js",
   "module": "build/index.esm.js",
