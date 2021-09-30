@@ -7,7 +7,7 @@ import Resolver from '@rsksmart/rns-resolver.js'
 // eslint-disable-next-line new-cap
 const resolver = new Resolver.forRskTestnet()
 
-export const AddressField = ({ receiverAddress, onReceiverAddressChange } : any) => {
+const AddressField = ({ receiverAddress, onReceiverAddressChange } : any) => {
   const [to, setTo] = useState('')
   const [resolverStatus, setResolverStatus] = useState('')
   const rskDomainValidation = (e:any) => {
@@ -37,7 +37,7 @@ export const AddressField = ({ receiverAddress, onReceiverAddressChange } : any)
   }
   return (
     <div>
-      <TextField id="to" label="To" value={to} onChange={rskDomainValidation} autoComplete='off'/>
+      <TextField id="to" value={to} onChange={rskDomainValidation} autoComplete='off'/>
   <div style={{
     marginTop: '5px',
     color: 'white',
@@ -47,3 +47,4 @@ export const AddressField = ({ receiverAddress, onReceiverAddressChange } : any)
     </div>
   )
 }
+export default AddressField
