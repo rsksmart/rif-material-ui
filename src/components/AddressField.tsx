@@ -1,6 +1,5 @@
 
 import React, { useState } from 'react'
-import { makeStyles } from '@mui/material/styles'
 import { TextField } from '@mui/material'
 import Resolver from '@rsksmart/rns-resolver.js'
 
