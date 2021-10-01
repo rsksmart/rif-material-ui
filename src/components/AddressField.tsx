@@ -16,7 +16,7 @@ export interface IAddressFieldInput{
 const AddressField = ({ label, onReceiverAddressChange } : IAddressFieldInput) => {
   const [to, setTo] = useState('')
   const [resolverStatus, setResolverStatus] = useState('')
-  const rskDomainValidation = (e:IEvent) => {
+  const setAddressOrDomainResolution = (e:IEvent) => {
     const selectedTo = (e && e.target && e.target.value)
     setTo(selectedTo)
     if (!selectedTo) {
@@ -24,11 +24,11 @@ const AddressField = ({ label, onReceiverAddressChange } : IAddressFieldInput) =
     }
 
     const re = /\.rsk$/ // match *.rsk domains
-    const isValid = re.test(String(selectedTo).toLowerCase())
+    const isDomain = re.test(String(selectedTo).toLowerCase())
 
     if (!selectedTo) {
       setResolverStatus('')
-    } else if (!isValid) {
+    } else if (!isDomain) {
       onReceiverAddressChange(selectedTo)
       setResolverStatus('')
     } else {
@@ -43,7 +43,7 @@ const AddressField = ({ label, onReceiverAddressChange } : IAddressFieldInput) =
   }
   return (
     <div>
-      <TextField id="to" value={to} label={label} onChange={rskDomainValidation} autoComplete='off'/>
+      <TextField id="to" value={to} label={label} onChange={setAddressOrDomainResolution} autoComplete='off'/>
   <div style={{
     marginTop: '5px',
     color: 'white',
