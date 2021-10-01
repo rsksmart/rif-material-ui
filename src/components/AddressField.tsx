@@ -1,21 +1,20 @@
 
 import React, { useState } from 'react'
 import { TextField } from '@mui/material'
-import Resolver from '@rsksmart/rns-resolver.js'
 
-// @ts-ignore
-// eslint-disable-next-line new-cap
-const resolver = new Resolver.forRskTestnet()
 interface IEvent{
   target: { value }
 }
 export interface IAddressFieldInput{
   label: string
   onReceiverAddressChange: (address: string) => void
+  resolverFn: (domain: string) => Promise<string>;
+  regexValidation: RegExp
 }
-const AddressField = ({ label, onReceiverAddressChange } : IAddressFieldInput) => {
+const AddressField = ({ label, onReceiverAddressChange, resolverFn, regexValidation = /\.rsk$/ } : IAddressFieldInput) => {
   const [to, setTo] = useState('')
   const [resolverStatus, setResolverStatus] = useState('')
+
   const setAddressOrDomainResolution = (e:IEvent) => {
     const selectedTo = (e && e.target && e.target.value)
     setTo(selectedTo)
@@ -23,8 +22,9 @@ const AddressField = ({ label, onReceiverAddressChange } : IAddressFieldInput) =
       return
     }
 
-    const re = /\.rsk$/ // match *.rsk domains
-    const isDomain = re.test(String(selectedTo).toLowerCase())
+    // const re = /\.rsk$/ // match *.rsk domains
+    const r = new RegExp(regexValidation)
+    const isDomain = r.test(String(selectedTo).toLowerCase())
 
     if (!selectedTo) {
       setResolverStatus('')
@@ -33,10 +33,11 @@ const AddressField = ({ label, onReceiverAddressChange } : IAddressFieldInput) =
       setResolverStatus('')
     } else {
       setResolverStatus('Fetching address...')
-      resolver.addr(selectedTo).then((address:string) => {
+      resolverFn(selectedTo).then((address:string) => {
         onReceiverAddressChange(address)
         setResolverStatus(address)
       }).catch((e:any) => {
+        console.log(e)
         setResolverStatus('Domain with no address')
       }) // gets rs
     }
