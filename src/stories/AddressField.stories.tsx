@@ -5,7 +5,7 @@ import themeDecorator from './decorators'
 import AddressField from '../components/AddressField'
 
 export default {
-  title: 'Components/TextField',
+  title: 'Components/AddressField',
   component: AddressField,
   parameters: {
     docs: {
