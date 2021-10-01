@@ -19,14 +19,6 @@ const Template: ComponentStory<typeof AddressField> = (args) => <AddressField {.
 
 export const Primary = Template.bind({})
 Primary.args = {
-  children: 'TextBu',
-  label: '',
-  onReceiverAddressChange: () => {}
-}
-
-export const Secondary = Template.bind({})
-Secondary.args = {
-  color: 'secondary',
   label: '',
   onReceiverAddressChange: () => {}
 }

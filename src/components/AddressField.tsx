@@ -6,11 +6,17 @@ import Resolver from '@rsksmart/rns-resolver.js'
 // @ts-ignore
 // eslint-disable-next-line new-cap
 const resolver = new Resolver.forRskTestnet()
-
-const AddressField = ({ label, onReceiverAddressChange } : any) => {
+interface IEvent{
+  target: { value }
+}
+interface IAddressFieldInput{
+  label: string
+  onReceiverAddressChange: (string) => void
+}
+const AddressField = ({ label, onReceiverAddressChange } : IAddressFieldInput) => {
   const [to, setTo] = useState('')
   const [resolverStatus, setResolverStatus] = useState('')
-  const rskDomainValidation = (e:any) => {
+  const rskDomainValidation = (e:IEvent) => {
     const selectedTo = (e && e.target && e.target.value)
     setTo(selectedTo)
     if (!selectedTo) {
