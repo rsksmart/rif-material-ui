@@ -11,7 +11,7 @@ interface IEvent{
 }
 export interface IAddressFieldInput{
   label: string
-  onReceiverAddressChange: (string) => void
+  onReceiverAddressChange: (address: string) => void
 }
 const AddressField = ({ label, onReceiverAddressChange } : IAddressFieldInput) => {
   const [to, setTo] = useState('')
