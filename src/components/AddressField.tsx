@@ -9,7 +9,7 @@ const resolver = new Resolver.forRskTestnet()
 interface IEvent{
   target: { value }
 }
-interface IAddressFieldInput{
+export interface IAddressFieldInput{
   label: string
   onReceiverAddressChange: (string) => void
 }
