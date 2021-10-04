@@ -1,7 +1,7 @@
 import { createTheme, responsiveFontSizes } from '@mui/material/styles'
 import { blue } from '@mui/material/colors'
 
-const defaultFont = 'Quicksand, sans-serif'
+export const themeFont = 'Quicksand, sans-serif'
 
 let theme = createTheme({
   palette: {
@@ -11,7 +11,7 @@ let theme = createTheme({
     MuiTypography: {
       styleOverrides: {
         root: `
-          font-family: ${defaultFont};
+          font-family: ${themeFont};
         `,
         h1: `
           font-style: normal;
@@ -124,14 +124,14 @@ let theme = createTheme({
       },
       styleOverrides: {
         root: {
-          fontFamily: defaultFont
+          fontFamily: themeFont
         },
         contained: {
           boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.25)',
           borderRadius: 12,
           paddingLeft: 40,
           paddingRight: 40,
-          minHeight: 61,
+          minHeight: 74,
           fontWeight: 'bold',
           fontSize: '21px',
           textTransform: 'none'
@@ -153,6 +153,7 @@ let theme = createTheme({
         html {
           height: 100%;
           min-height: 100%;
+          font-family: ${themeFont};
         },
         body {
           font-family: ${defaultFont};
