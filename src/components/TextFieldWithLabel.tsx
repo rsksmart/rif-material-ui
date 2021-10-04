@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import Paper from '@mui/material/Paper'
 import InputBase from '@mui/material/InputBase'
-import { InputLabel, InputLabelProps, InputBaseProps, FormHelperText } from '@mui/material'
+import { InputLabelProps, InputBaseProps, FormHelperText } from '@mui/material'
 import { styled } from '@mui/material/styles'
 import { themeFont } from '../assets/theme'
 
@@ -9,14 +9,15 @@ interface StyledInputLabelProps extends InputLabelProps {
   isFocused?: boolean;
 }
 
-const StyledInputLabel = styled(InputLabel, {
+const StyledInputLabel = styled('label', {
   shouldForwardProp: (prop) => prop !== 'isFocused'
 })<StyledInputLabelProps>(({ theme, isFocused }) => ({
   fontFamily: themeFont,
   fontStyle: 'normal',
   fontWeight: 'normal',
   fontSize: '22px',
-  lineHeight: '47px',
+  lineHeight: '27px',
+  transformOrigin: 'left center',
   color: isFocused ? theme.palette.primary.main : '#3F3F3F',
   textShadow: '0px 4px 4px rgba(0, 0, 0, 0.25)',
   top: 'auto'
@@ -27,7 +28,7 @@ const StyledInput = styled(InputBase)({
   fontFamily: themeFont,
   fontStyle: 'normal',
   fontWeight: 'normal',
-  fontSize: '27px',
+  fontSize: '24px',
   lineHeight: '34px',
   color: '#3F3F3F',
   textShadow: '0px 4px 4px rgba(0, 0, 0, 0.25)',
@@ -61,7 +62,7 @@ const StyledVerticalGroup = styled('div')({
   display: 'flex',
   flex: 1,
   flexDirection: 'column',
-  paddingLeft: 15,
+  paddingLeft: 10,
   paddingRight: 10
 })
 

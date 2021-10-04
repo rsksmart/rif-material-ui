@@ -22,7 +22,7 @@ const Template: ComponentStory<typeof AddressField> = (args) => <AddressField {.
 const resolver = new Resolver.forRskTestnet()
 export const Primary = Template.bind({})
 Primary.args = {
-  label: '',
+  label: 'Address',
   onReceiverAddressChange: () => {},
   resolverFn: resolver.addr.bind(resolver),
   regexValidation: /\.rsk$/
