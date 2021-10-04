@@ -1,57 +1,62 @@
 
 import React, { useState } from 'react'
-import { TextField } from '@mui/material'
+import TextFieldWithLabel from './TextFieldWithLabel'
 
 interface IEvent{
-  target: { value }
+  target: {
+    value: string
+  }
 }
 export interface IAddressFieldInput{
+  id: string
   label: string
   onReceiverAddressChange: (address: string) => void
   resolverFn: (domain: string) => Promise<string>;
   regexValidation: RegExp
 }
-const AddressField = ({ label, onReceiverAddressChange, resolverFn, regexValidation = /\.rsk$/ } : IAddressFieldInput) => {
+
+const AddressField = ({ id, label, onReceiverAddressChange, resolverFn, regexValidation = /\.rsk$/ } : IAddressFieldInput) => {
   const [to, setTo] = useState('')
   const [resolverStatus, setResolverStatus] = useState('')
 
-  const setAddressOrDomainResolution = (e:IEvent) => {
-    const selectedTo = (e && e.target && e.target.value)
+  const setAddressOrDomainResolution = async (e: IEvent) => {
+    const selectedTo = e.target.value
     setTo(selectedTo)
+
     if (!selectedTo) {
       return
     }
 
-    // const re = /\.rsk$/ // match *.rsk domains
-    const r = new RegExp(regexValidation)
-    const isDomain = r.test(String(selectedTo).toLowerCase())
+    const isDomain = new RegExp(regexValidation).test(selectedTo.toLowerCase())
 
-    if (!selectedTo) {
-      setResolverStatus('')
-    } else if (!isDomain) {
+    if (!isDomain) {
       onReceiverAddressChange(selectedTo)
       setResolverStatus('')
     } else {
       setResolverStatus('Fetching address...')
-      resolverFn(selectedTo).then((address:string) => {
+
+      try {
+        const address = await resolverFn(selectedTo)
+
         onReceiverAddressChange(address)
         setResolverStatus(address)
-      }).catch((e:any) => {
-        console.log(e)
-        setResolverStatus('Domain with no address')
-      }) // gets rs
+      } catch (error) {
+        console.error(error)
+        setResolverStatus('Error: Domain has no address set')
+      }
     }
   }
   return (
-    <div>
-      <TextField id="to" value={to} label={label} onChange={setAddressOrDomainResolution} autoComplete='off'/>
-  <div style={{
-    marginTop: '5px',
-    color: 'white',
-    fontSize: '18px',
-    fontWeight: 'bold'
-  }} className={'resolverStatus'}>{resolverStatus}</div>
-    </div>
+    <TextFieldWithLabel
+      key={id}
+      id={id}
+      value={to}
+      label={label}
+      error={resolverStatus.toLowerCase().includes('error')}
+      helperText={resolverStatus}
+      onChange={setAddressOrDomainResolution}
+      autoComplete='off'
+    />
   )
 }
 export default AddressField
