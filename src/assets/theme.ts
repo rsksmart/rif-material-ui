@@ -86,7 +86,7 @@ let theme = createTheme({
           padding: 0,
           paddingLeft: 15,
           paddingRight: 10,
-          fontFamily: defaultFont,
+          fontFamily: themeFont,
           fontStyle: 'normal',
           fontWeight: 'normal',
           fontSize: '27px',
@@ -105,7 +105,7 @@ let theme = createTheme({
       },
       styleOverrides: {
         filled: {
-          fontFamily: defaultFont,
+          fontFamily: themeFont,
           fontStyle: 'normal',
           fontWeight: 'normal',
           fontSize: '22px',
@@ -156,7 +156,7 @@ let theme = createTheme({
           font-family: ${themeFont};
         },
         body {
-          font-family: ${defaultFont};
+          font-family: ${themeFont};
           background-color: #aef7d8;
           background-image: linear-gradient(#0190f7,#aef7d8);
           background-repeat: no-repeat;
